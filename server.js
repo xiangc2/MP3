@@ -256,9 +256,12 @@ router.route("/users/:id")
                 return;
             }
 
-            res.json({
-                message:"User deleted",
-                data:[]
+            User.remove({ _id: req.params.id}, function(err,user){
+
+                res.json({
+                    message:"User deleted",
+                    data:[]
+                });
             });
         });
 
