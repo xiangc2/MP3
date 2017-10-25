@@ -246,7 +246,8 @@ router.route("/users/:id")
     })
 
     .delete(function(req,res){
-        User.remove({ _id: req.params.id}, function(err,user){
+        User.findById(req.params.id, function(err,user){
+
             if(err || user === null){
                 res.status(404).json({
                     message: "User not found",
@@ -260,6 +261,7 @@ router.route("/users/:id")
                 data:[]
             });
         });
+
     })
 
 
@@ -462,8 +464,8 @@ router.route("/tasks/:id")
     })
 
     .delete(function(req,res){
-        Task.remove({ _id: req.params.id}, function(err,task){
-            if(err || task === null){
+        Task.findById(req.params.id, function(err,task){
+            if(err  || task === null){
                 res.status(404).json({
                     message: "Task not found",
                     data:[]
@@ -471,11 +473,14 @@ router.route("/tasks/:id")
                 return;
             }
 
-            res.json({
-                message:"Task deleted",
-                data:[]
+            Task.remove({ _id: req.params.id}, function(err,task){
+
+                res.json({
+                    message:"Task deleted",
+                    data:[]
+                });
             });
-        })
+        });
     })
 
 //=================================================================
