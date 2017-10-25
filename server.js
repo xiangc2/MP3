@@ -163,7 +163,7 @@ router.route("/users/:id")
     .get(function(req,res){
         User.findById(req.params.id, function(err,user){
 
-            if(err){
+            if(err || user === null){
                 res.status(404).json({
                     message: "User not found",
                     data: []
@@ -183,7 +183,7 @@ router.route("/users/:id")
 
         User.findById(req.params.id, function(err,user){
 
-            if(err){
+            if(err || user === null){
                 res.status(404).json({
                     message: "User not found",
                     data: []
@@ -247,7 +247,7 @@ router.route("/users/:id")
 
     .delete(function(req,res){
         User.remove({ _id: req.params.id}, function(err,user){
-            if(err){
+            if(err || user === null){
                 res.status(404).json({
                     message: "User not found",
                     data: []
@@ -380,7 +380,7 @@ router.route("/tasks/:id")
 
     .get(function(req,res){
         Task.findById(req.params.id, function(err,task){
-            if(err){
+            if(err || task === null){
                 res.status(404).json({
                     message:"Task not found",
                     data:[]
@@ -399,7 +399,7 @@ router.route("/tasks/:id")
 
     .put(function(req,res){
         Task.findById(req.params.id, function(err,task){
-            if(err){
+            if(err  || task === null){
                 res.status(404).json({
                     message: "Task not found",
                     data:[]
@@ -463,7 +463,7 @@ router.route("/tasks/:id")
 
     .delete(function(req,res){
         Task.remove({ _id: req.params.id}, function(err,task){
-            if(err){
+            if(err || task === null){
                 res.status(404).json({
                     message: "Task not found",
                     data:[]
